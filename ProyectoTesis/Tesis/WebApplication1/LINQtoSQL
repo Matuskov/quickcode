@@ -1,0 +1,294 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Thequickcode" Class="LINQtoSQLDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=localhost\SQLExpress;Initial Catalog=Thequickcode;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="ThequickcodeConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.ARCHIVO_PROGRAMADOR" Member="ARCHIVO_PROGRAMADORs">
+    <Type Name="ARCHIVO_PROGRAMADOR">
+      <Column Name="ARCHIVO_PROGRAMADOR_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TIPO_ARCHIVO_PROGRAMADOR_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="RUN" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ARCHIVO" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="NOMBRE" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Association Name="PROGRAMADOR_ARCHIVO_PROGRAMADOR" Member="PROGRAMADOR" ThisKey="RUN" OtherKey="RUN" Type="PROGRAMADOR" IsForeignKey="true" />
+      <Association Name="TIPO_ARCHIVO_PROGRAMADOR_ARCHIVO_PROGRAMADOR" Member="TIPO_ARCHIVO_PROGRAMADOR" ThisKey="TIPO_ARCHIVO_PROGRAMADOR_ID" OtherKey="TIPO_ARCHIVO_PROGRAMADOR_ID" Type="TIPO_ARCHIVO_PROGRAMADOR" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.USUARIO_PROGRAMADOR" Member="USUARIO_PROGRAMADORs">
+    <Type Name="USUARIO_PROGRAMADOR">
+      <Column Name="USUARIO_PROGRAMADOR_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ESTADO_USUARIO_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="USUARIO" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="PASS" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="SAL" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="USUARIO_PROGRAMADOR_PROGRAMADOR" Member="PROGRAMADORs" ThisKey="USUARIO_PROGRAMADOR_ID" OtherKey="USUARIO_PROGRAMADOR_ID" Type="PROGRAMADOR" />
+      <Association Name="ESTADO_USUARIO_USUARIO_PROGRAMADOR" Member="ESTADO_USUARIO" ThisKey="ESTADO_USUARIO_ID" OtherKey="ESTADO_USUARIO_ID" Type="ESTADO_USUARIO" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ARCHIVO_PROYECTO" Member="ARCHIVO_PROYECTOs">
+    <Type Name="ARCHIVO_PROYECTO">
+      <Column Name="ARCHIVO_PROYECTO_ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="PROYECTO_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TIPO_ARCHIVO_PROYECTO_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ARCHIVO" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="NOMBRE" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Association Name="PROYECTO_ARCHIVO_PROYECTO" Member="PROYECTO" ThisKey="PROYECTO_ID" OtherKey="PROYECTO_ID" Type="PROYECTO" IsForeignKey="true" />
+      <Association Name="TIPO_ARCHIVO_PROYECTO_ARCHIVO_PROYECTO" Member="TIPO_ARCHIVO_PROYECTO" ThisKey="TIPO_ARCHIVO_PROYECTO_ID" OtherKey="TIPO_ARCHIVO_PROYECTO_ID" Type="TIPO_ARCHIVO_PROYECTO" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CALIFICACION_EMPRESA" Member="CALIFICACION_EMPRESAs">
+    <Type Name="CALIFICACION_EMPRESA">
+      <Column Name="PROYECTO_ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="RUT" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="RATING" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="COMENTARIO" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Association Name="PROYECTO_CALIFICACION_EMPRESA" Member="PROYECTO" ThisKey="PROYECTO_ID" OtherKey="PROYECTO_ID" Type="PROYECTO" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CALIFICACION_PROGRAMADOR" Member="CALIFICACION_PROGRAMADORs">
+    <Type Name="CALIFICACION_PROGRAMADOR">
+      <Column Name="RUN" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="PROYECTO_ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="RATING" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="COMENTARIO" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Association Name="PROGRAMADOR_CALIFICACION_PROGRAMADOR" Member="PROGRAMADOR" ThisKey="RUN" OtherKey="RUN" Type="PROGRAMADOR" IsForeignKey="true" />
+      <Association Name="PROYECTO_CALIFICACION_PROGRAMADOR" Member="PROYECTO" ThisKey="PROYECTO_ID" OtherKey="PROYECTO_ID" Type="PROYECTO" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CARRERA" Member="CARRERAs">
+    <Type Name="CARRERA">
+      <Column Name="CARRERA_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="NOMBRE" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Association Name="CARRERA_INSTITUCION_CARRERA_PROGRAMADOR" Member="INSTITUCION_CARRERA_PROGRAMADORs" ThisKey="CARRERA_ID" OtherKey="CARRERA_ID" Type="INSTITUCION_CARRERA_PROGRAMADOR" />
+      <Association Name="CARRERA_INSTITUCION_CARRERA_PROYECTO" Member="INSTITUCION_CARRERA_PROYECTOs" ThisKey="CARRERA_ID" OtherKey="CARRERA_ID" Type="INSTITUCION_CARRERA_PROYECTO" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CIUDAD" Member="CIUDADs">
+    <Type Name="CIUDAD">
+      <Column Name="CIUDAD_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="REGION_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="NOMBRE" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Association Name="CIUDAD_COMUNA" Member="COMUNAs" ThisKey="CIUDAD_ID" OtherKey="CIUDAD_ID" Type="COMUNA" />
+      <Association Name="REGION_CIUDAD" Member="REGION" ThisKey="REGION_ID" OtherKey="REGION_ID" Type="REGION" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CLASIFICACION_CONOCIMIENTO" Member="CLASIFICACION_CONOCIMIENTOs">
+    <Type Name="CLASIFICACION_CONOCIMIENTO">
+      <Column Name="CLASIFICACION_CONOCIMIENTO_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="DESCRIPCION" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Association Name="CLASIFICACION_CONOCIMIENTO_TIPO_CONOCIMIENTO" Member="TIPO_CONOCIMIENTOs" ThisKey="CLASIFICACION_CONOCIMIENTO_ID" OtherKey="CLASIFICACION_CONOCIMIENTO_ID" Type="TIPO_CONOCIMIENTO" />
+    </Type>
+  </Table>
+  <Table Name="dbo.COMUNA" Member="COMUNAs">
+    <Type Name="COMUNA">
+      <Column Name="COMUNA_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="CIUDAD_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="NOMBRE" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Association Name="COMUNA_EMPRESA" Member="EMPRESAs" ThisKey="COMUNA_ID" OtherKey="COMUNA_ID" Type="EMPRESA" />
+      <Association Name="COMUNA_PROGRAMADOR" Member="PROGRAMADORs" ThisKey="COMUNA_ID" OtherKey="COMUNA_ID" Type="PROGRAMADOR" />
+      <Association Name="CIUDAD_COMUNA" Member="CIUDAD" ThisKey="CIUDAD_ID" OtherKey="CIUDAD_ID" Type="CIUDAD" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CONOCIMIENTO_PROGRAMADOR" Member="CONOCIMIENTO_PROGRAMADORs">
+    <Type Name="CONOCIMIENTO_PROGRAMADOR">
+      <Column Name="RUN" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TIPO_CONOCIMIENTO_ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="PROGRAMADOR_CONOCIMIENTO_PROGRAMADOR" Member="PROGRAMADOR" ThisKey="RUN" OtherKey="RUN" Type="PROGRAMADOR" IsForeignKey="true" />
+      <Association Name="TIPO_CONOCIMIENTO_CONOCIMIENTO_PROGRAMADOR" Member="TIPO_CONOCIMIENTO" ThisKey="TIPO_CONOCIMIENTO_ID" OtherKey="TIPO_CONOCIMIENTO_ID" Type="TIPO_CONOCIMIENTO" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CONOCIMIENTO_PROYECTO" Member="CONOCIMIENTO_PROYECTOs">
+    <Type Name="CONOCIMIENTO_PROYECTO">
+      <Column Name="PROYECTO_ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TIPO_CONOCIMIENTO_ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="PROYECTO_CONOCIMIENTO_PROYECTO" Member="PROYECTO" ThisKey="PROYECTO_ID" OtherKey="PROYECTO_ID" Type="PROYECTO" IsForeignKey="true" />
+      <Association Name="TIPO_CONOCIMIENTO_CONOCIMIENTO_PROYECTO" Member="TIPO_CONOCIMIENTO" ThisKey="TIPO_CONOCIMIENTO_ID" OtherKey="TIPO_CONOCIMIENTO_ID" Type="TIPO_CONOCIMIENTO" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.EMPRESA" Member="EMPRESAs">
+    <Type Name="EMPRESA">
+      <Column Name="RUT" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="RUBRO_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="COMUNA_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="USUARIO_EMPRESA_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="RAZON_SOCIAL" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="TELEFONO" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="DIRECCION" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="MAIL" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Association Name="EMPRESA_PROYECTO" Member="PROYECTOs" ThisKey="RUT" OtherKey="RUT_EMPRESA" Type="PROYECTO" />
+      <Association Name="COMUNA_EMPRESA" Member="COMUNA" ThisKey="COMUNA_ID" OtherKey="COMUNA_ID" Type="COMUNA" IsForeignKey="true" />
+      <Association Name="RUBRO_EMPRESA" Member="RUBRO" ThisKey="RUBRO_ID" OtherKey="RUBRO_ID" Type="RUBRO" IsForeignKey="true" />
+      <Association Name="USUARIO_EMPRESA_EMPRESA" Member="USUARIO_EMPRESA" ThisKey="USUARIO_EMPRESA_ID" OtherKey="USUARIO_EMPRESA_ID" Type="USUARIO_EMPRESA" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ESTADO_PROYECTO" Member="ESTADO_PROYECTOs">
+    <Type Name="ESTADO_PROYECTO">
+      <Column Name="TIPO_ESTADO_ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="PROYECTO_ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="FECHA_INICIO" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="FECHA_TERMINO" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="PROYECTO_ESTADO_PROYECTO" Member="PROYECTO" ThisKey="PROYECTO_ID" OtherKey="PROYECTO_ID" Type="PROYECTO" IsForeignKey="true" />
+      <Association Name="TIPO_ESTADO_ESTADO_PROYECTO" Member="TIPO_ESTADO" ThisKey="TIPO_ESTADO_ID" OtherKey="TIPO_ESTADO_ID" Type="TIPO_ESTADO" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ESTADO_USUARIO" Member="ESTADO_USUARIOs">
+    <Type Name="ESTADO_USUARIO">
+      <Column Name="ESTADO_USUARIO_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="DESCRIPCION" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Association Name="ESTADO_USUARIO_USUARIO_PROGRAMADOR" Member="USUARIO_PROGRAMADORs" ThisKey="ESTADO_USUARIO_ID" OtherKey="ESTADO_USUARIO_ID" Type="USUARIO_PROGRAMADOR" />
+      <Association Name="ESTADO_USUARIO_USUARIO_EMPRESA" Member="USUARIO_EMPRESAs" ThisKey="ESTADO_USUARIO_ID" OtherKey="ESTADO_USUARIO_ID" Type="USUARIO_EMPRESA" />
+    </Type>
+  </Table>
+  <Table Name="dbo.INSTITUCION" Member="INSTITUCIONs">
+    <Type Name="INSTITUCION">
+      <Column Name="INSTITUCION_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="NOMBRE" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Association Name="INSTITUCION_INSTITUCION_CARRERA_PROGRAMADOR" Member="INSTITUCION_CARRERA_PROGRAMADORs" ThisKey="INSTITUCION_ID" OtherKey="INSTITUCION_ID" Type="INSTITUCION_CARRERA_PROGRAMADOR" />
+      <Association Name="INSTITUCION_INSTITUCION_CARRERA_PROYECTO" Member="INSTITUCION_CARRERA_PROYECTOs" ThisKey="INSTITUCION_ID" OtherKey="INSTITUCION_ID" Type="INSTITUCION_CARRERA_PROYECTO" />
+    </Type>
+  </Table>
+  <Table Name="dbo.INSTITUCION_CARRERA_PROGRAMADOR" Member="INSTITUCION_CARRERA_PROGRAMADORs">
+    <Type Name="INSTITUCION_CARRERA_PROGRAMADOR">
+      <Column Name="RUN" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="CARRERA_ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="INSTITUCION_ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="CARRERA_INSTITUCION_CARRERA_PROGRAMADOR" Member="CARRERA" ThisKey="CARRERA_ID" OtherKey="CARRERA_ID" Type="CARRERA" IsForeignKey="true" />
+      <Association Name="INSTITUCION_INSTITUCION_CARRERA_PROGRAMADOR" Member="INSTITUCION" ThisKey="INSTITUCION_ID" OtherKey="INSTITUCION_ID" Type="INSTITUCION" IsForeignKey="true" />
+      <Association Name="PROGRAMADOR_INSTITUCION_CARRERA_PROGRAMADOR" Member="PROGRAMADOR" ThisKey="RUN" OtherKey="RUN" Type="PROGRAMADOR" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.INSTITUCION_CARRERA_PROYECTO" Member="INSTITUCION_CARRERA_PROYECTOs">
+    <Type Name="INSTITUCION_CARRERA_PROYECTO">
+      <Column Name="PROYECTO_ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="INSTITUCION_ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="CARRERA_ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="CARRERA_INSTITUCION_CARRERA_PROYECTO" Member="CARRERA" ThisKey="CARRERA_ID" OtherKey="CARRERA_ID" Type="CARRERA" IsForeignKey="true" />
+      <Association Name="INSTITUCION_INSTITUCION_CARRERA_PROYECTO" Member="INSTITUCION" ThisKey="INSTITUCION_ID" OtherKey="INSTITUCION_ID" Type="INSTITUCION" IsForeignKey="true" />
+      <Association Name="PROYECTO_INSTITUCION_CARRERA_PROYECTO" Member="PROYECTO" ThisKey="PROYECTO_ID" OtherKey="PROYECTO_ID" Type="PROYECTO" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.PAGO" Member="PAGOs">
+    <Type Name="PAGO">
+      <Column Name="PROYECTO_ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="POS_PROYECTO_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="RUN" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="EMPRESA_PAGO" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="PROGRAMADOR_PAGO" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="POSTULANTE_PAGO" Member="POSTULANTE" ThisKey="POS_PROYECTO_ID,RUN" OtherKey="PROYECTO_ID,RUN" Type="POSTULANTE" IsForeignKey="true" />
+      <Association Name="PROYECTO_PAGO" Member="PROYECTO" ThisKey="PROYECTO_ID" OtherKey="PROYECTO_ID" Type="PROYECTO" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.POSTULANTE" Member="POSTULANTEs">
+    <Type Name="POSTULANTE">
+      <Column Name="PROYECTO_ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="RUN" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ADJUDICADO" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="POSTULANTE_PAGO" Member="PAGOs" ThisKey="PROYECTO_ID,RUN" OtherKey="POS_PROYECTO_ID,RUN" Type="PAGO" />
+      <Association Name="PROGRAMADOR_POSTULANTE" Member="PROGRAMADOR" ThisKey="RUN" OtherKey="RUN" Type="PROGRAMADOR" IsForeignKey="true" />
+      <Association Name="PROYECTO_POSTULANTE" Member="PROYECTO" ThisKey="PROYECTO_ID" OtherKey="PROYECTO_ID" Type="PROYECTO" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.PROGRAMADOR" Member="PROGRAMADORs">
+    <Type Name="PROGRAMADOR">
+      <Column Name="RUN" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="COMUNA_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="USUARIO_PROGRAMADOR_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="NOMBRE" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="APELLIDOS" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="DIRECCION" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="TELEFONO" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="MAIL" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="DESCRIPCION" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Association Name="PROGRAMADOR_ARCHIVO_PROGRAMADOR" Member="ARCHIVO_PROGRAMADORs" ThisKey="RUN" OtherKey="RUN" Type="ARCHIVO_PROGRAMADOR" />
+      <Association Name="PROGRAMADOR_CALIFICACION_PROGRAMADOR" Member="CALIFICACION_PROGRAMADORs" ThisKey="RUN" OtherKey="RUN" Type="CALIFICACION_PROGRAMADOR" />
+      <Association Name="PROGRAMADOR_CONOCIMIENTO_PROGRAMADOR" Member="CONOCIMIENTO_PROGRAMADORs" ThisKey="RUN" OtherKey="RUN" Type="CONOCIMIENTO_PROGRAMADOR" />
+      <Association Name="PROGRAMADOR_INSTITUCION_CARRERA_PROGRAMADOR" Member="INSTITUCION_CARRERA_PROGRAMADORs" ThisKey="RUN" OtherKey="RUN" Type="INSTITUCION_CARRERA_PROGRAMADOR" />
+      <Association Name="PROGRAMADOR_POSTULANTE" Member="POSTULANTEs" ThisKey="RUN" OtherKey="RUN" Type="POSTULANTE" />
+      <Association Name="COMUNA_PROGRAMADOR" Member="COMUNA" ThisKey="COMUNA_ID" OtherKey="COMUNA_ID" Type="COMUNA" IsForeignKey="true" />
+      <Association Name="USUARIO_PROGRAMADOR_PROGRAMADOR" Member="USUARIO_PROGRAMADOR" ThisKey="USUARIO_PROGRAMADOR_ID" OtherKey="USUARIO_PROGRAMADOR_ID" Type="USUARIO_PROGRAMADOR" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.PROYECTO" Member="PROYECTOs">
+    <Type Name="PROYECTO">
+      <Column Name="PROYECTO_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TIPO_PROYECTO_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="NOMBRE" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="REMUNERACION" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="FECHA_INICIO" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="FECHA_LIMITE" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="FECHA_FIN" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="DESCRIPCION" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="RUT_EMPRESA" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="PROYECTO_ARCHIVO_PROYECTO" Member="ARCHIVO_PROYECTOs" ThisKey="PROYECTO_ID" OtherKey="PROYECTO_ID" Type="ARCHIVO_PROYECTO" />
+      <Association Name="PROYECTO_CALIFICACION_EMPRESA" Member="CALIFICACION_EMPRESAs" ThisKey="PROYECTO_ID" OtherKey="PROYECTO_ID" Type="CALIFICACION_EMPRESA" />
+      <Association Name="PROYECTO_CALIFICACION_PROGRAMADOR" Member="CALIFICACION_PROGRAMADORs" ThisKey="PROYECTO_ID" OtherKey="PROYECTO_ID" Type="CALIFICACION_PROGRAMADOR" />
+      <Association Name="PROYECTO_CONOCIMIENTO_PROYECTO" Member="CONOCIMIENTO_PROYECTOs" ThisKey="PROYECTO_ID" OtherKey="PROYECTO_ID" Type="CONOCIMIENTO_PROYECTO" />
+      <Association Name="PROYECTO_ESTADO_PROYECTO" Member="ESTADO_PROYECTOs" ThisKey="PROYECTO_ID" OtherKey="PROYECTO_ID" Type="ESTADO_PROYECTO" />
+      <Association Name="PROYECTO_INSTITUCION_CARRERA_PROYECTO" Member="INSTITUCION_CARRERA_PROYECTOs" ThisKey="PROYECTO_ID" OtherKey="PROYECTO_ID" Type="INSTITUCION_CARRERA_PROYECTO" />
+      <Association Name="PROYECTO_PAGO" Member="PAGOs" ThisKey="PROYECTO_ID" OtherKey="PROYECTO_ID" Type="PAGO" />
+      <Association Name="PROYECTO_POSTULANTE" Member="POSTULANTEs" ThisKey="PROYECTO_ID" OtherKey="PROYECTO_ID" Type="POSTULANTE" />
+      <Association Name="EMPRESA_PROYECTO" Member="EMPRESA" ThisKey="RUT_EMPRESA" OtherKey="RUT" Type="EMPRESA" IsForeignKey="true" />
+      <Association Name="TIPO_PROYECTO_PROYECTO" Member="TIPO_PROYECTO" ThisKey="TIPO_PROYECTO_ID" OtherKey="TIPO_PROYECTO_ID" Type="TIPO_PROYECTO" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.REGION" Member="REGIONs">
+    <Type Name="REGION">
+      <Column Name="REGION_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="NOMBRE" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Association Name="REGION_CIUDAD" Member="CIUDADs" ThisKey="REGION_ID" OtherKey="REGION_ID" Type="CIUDAD" />
+    </Type>
+  </Table>
+  <Table Name="dbo.RUBRO" Member="RUBROs">
+    <Type Name="RUBRO">
+      <Column Name="RUBRO_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="DESCRIPCION" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Association Name="RUBRO_EMPRESA" Member="EMPRESAs" ThisKey="RUBRO_ID" OtherKey="RUBRO_ID" Type="EMPRESA" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TIPO_ARCHIVO_PROGRAMADOR" Member="TIPO_ARCHIVO_PROGRAMADORs">
+    <Type Name="TIPO_ARCHIVO_PROGRAMADOR">
+      <Column Name="TIPO_ARCHIVO_PROGRAMADOR_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="DESCRIPCION" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Association Name="TIPO_ARCHIVO_PROGRAMADOR_ARCHIVO_PROGRAMADOR" Member="ARCHIVO_PROGRAMADORs" ThisKey="TIPO_ARCHIVO_PROGRAMADOR_ID" OtherKey="TIPO_ARCHIVO_PROGRAMADOR_ID" Type="ARCHIVO_PROGRAMADOR" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TIPO_ARCHIVO_PROYECTO" Member="TIPO_ARCHIVO_PROYECTOs">
+    <Type Name="TIPO_ARCHIVO_PROYECTO">
+      <Column Name="TIPO_ARCHIVO_PROYECTO_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="DESCRIPCION" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="TIPO_ARCHIVO_PROYECTO_ARCHIVO_PROYECTO" Member="ARCHIVO_PROYECTOs" ThisKey="TIPO_ARCHIVO_PROYECTO_ID" OtherKey="TIPO_ARCHIVO_PROYECTO_ID" Type="ARCHIVO_PROYECTO" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TIPO_CONOCIMIENTO" Member="TIPO_CONOCIMIENTOs">
+    <Type Name="TIPO_CONOCIMIENTO">
+      <Column Name="TIPO_CONOCIMIENTO_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="CLASIFICACION_CONOCIMIENTO_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="DESCRIPCION" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Association Name="TIPO_CONOCIMIENTO_CONOCIMIENTO_PROGRAMADOR" Member="CONOCIMIENTO_PROGRAMADORs" ThisKey="TIPO_CONOCIMIENTO_ID" OtherKey="TIPO_CONOCIMIENTO_ID" Type="CONOCIMIENTO_PROGRAMADOR" />
+      <Association Name="TIPO_CONOCIMIENTO_CONOCIMIENTO_PROYECTO" Member="CONOCIMIENTO_PROYECTOs" ThisKey="TIPO_CONOCIMIENTO_ID" OtherKey="TIPO_CONOCIMIENTO_ID" Type="CONOCIMIENTO_PROYECTO" />
+      <Association Name="CLASIFICACION_CONOCIMIENTO_TIPO_CONOCIMIENTO" Member="CLASIFICACION_CONOCIMIENTO" ThisKey="CLASIFICACION_CONOCIMIENTO_ID" OtherKey="CLASIFICACION_CONOCIMIENTO_ID" Type="CLASIFICACION_CONOCIMIENTO" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TIPO_ESTADO" Member="TIPO_ESTADOs">
+    <Type Name="TIPO_ESTADO">
+      <Column Name="TIPO_ESTADO_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="DESCRIPCION" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Association Name="TIPO_ESTADO_ESTADO_PROYECTO" Member="ESTADO_PROYECTOs" ThisKey="TIPO_ESTADO_ID" OtherKey="TIPO_ESTADO_ID" Type="ESTADO_PROYECTO" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TIPO_PROYECTO" Member="TIPO_PROYECTOs">
+    <Type Name="TIPO_PROYECTO">
+      <Column Name="TIPO_PROYECTO_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="DESCRIPCION" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Association Name="TIPO_PROYECTO_PROYECTO" Member="PROYECTOs" ThisKey="TIPO_PROYECTO_ID" OtherKey="TIPO_PROYECTO_ID" Type="PROYECTO" />
+    </Type>
+  </Table>
+  <Table Name="dbo.USUARIO_EMPRESA" Member="USUARIO_EMPRESAs">
+    <Type Name="USUARIO_EMPRESA">
+      <Column Name="USUARIO_EMPRESA_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ESTADO_USUARIO_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="USUARIO" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="PASS" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="SAL" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="USUARIO_EMPRESA_EMPRESA" Member="EMPRESAs" ThisKey="USUARIO_EMPRESA_ID" OtherKey="USUARIO_EMPRESA_ID" Type="EMPRESA" />
+      <Association Name="ESTADO_USUARIO_USUARIO_EMPRESA" Member="ESTADO_USUARIO" ThisKey="ESTADO_USUARIO_ID" OtherKey="ESTADO_USUARIO_ID" Type="ESTADO_USUARIO" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>
